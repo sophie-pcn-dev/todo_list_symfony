@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TaskController!{% endblock %}
+{% block title %}Liste de tâches !{% endblock %}
 
 {% block body %}
 <style>
@@ -8,13 +8,18 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Users/poncinsophie/symfony/todo_list/src/Controller/TaskController.php</code></li>
-        <li>Your template at <code>/Users/poncinsophie/symfony/todo_list/templates/task/index.html.twig</code></li>
-    </ul>
-</div>
+    <h1>Toutes les tâches</h1>
+
+    {% for task in tasks %}
+
+    <div>
+    <h2>{{task.title}}</h2>
+    <p> Fait {{task.isDone ? 'Oui' : 'Non'}}</p>
+    <span>Crée le : {{task.createdAt | date('d/m/Y H:i:s')}}</span>
+    <hr>
+    </div>
+    {% endfor %}
+    
+
 {% endblock %}
