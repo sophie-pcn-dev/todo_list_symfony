@@ -17,7 +17,7 @@ final class TaskController extends AbstractController
     public function index(
         Request $request, 
         TaskRepository $repo, 
-        EntityManagerInterface $em): Response //em envoie vers bdd
+        EntityManagerInterface $em): Response //em envoie vers bdd, request car on récupère
     {
 
 
@@ -42,8 +42,6 @@ final class TaskController extends AbstractController
 
             'tasks' => $repo->findBy([], ['createdAt' => 'DESC']),
             'form' => $form,
-            
-        
            
         ]);
     }
