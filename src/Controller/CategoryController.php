@@ -44,6 +44,21 @@ final class CategoryController extends AbstractController
         return $this->render('category/new.html.twig', ['form' => $form]);
     }
 
+    #[Route('/categories/delete', name: 'category_delete')]
+    public function delete(EntityManagerInterface $em, Request $request, CategoryRepository $repoCategory): Response{
+        
+        $id = $request->getPayload()->get('id');  // parce que on récup "name = "id"" du form
+        $cat = $repoCategory->find($id); 
+
+        if( $cat == null){
+            throw $this->createNotFoundException(); //si pas trouvé de catégorie
+        }
+        $em->remove($cat);
+        $em->flush(); //va persister dans la bdd, donc faire la modif
+
+        return $this->redirectToRoute('category_index');
+    
+    }
 
     #[Route('/categories/{id}', name: 'category_show')]
     public function show(CategoryRepository $repoCategory, $id){
@@ -68,11 +83,4 @@ final class CategoryController extends AbstractController
         return $this->render('category/edit.html.twig', ['form' => $form]);
     }
 
-    #[Route('/categories/{id}/delete', name: 'category_delete')]
-    public function delete(Category $cat, EntityManagerInterface $em): Response{
-        $em->remove($cat);
-        $em->flush();
-
-        return $this->redirectToRoute('category_index');
-    
-    }}
+    }

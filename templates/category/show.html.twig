@@ -9,7 +9,10 @@
 <a href="{{ path('category_edit', {'id': category.id}) }}"> Modifier la catégorie </a> 
 {# passer les paramètres en temps qu'objet #}
 <div>
-<form action="{{ path('category_delete', {'id': category.id}) }}" method="post">
+<form action="{{ path('category_delete') }}" method="post" onsubmit="return confirm('Supprimer cette catégorie ?')">
+<input type="hidden" name = "id" value = "{{category.id}}"> 
+{# on masque l'id pour pas passer par l'url #}
+
 <button type="submit">Supprimer</button>
 </form>
 </div>
