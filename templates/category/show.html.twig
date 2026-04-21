@@ -6,4 +6,12 @@
 
 {{category.name}}
 
+<a href="{{ path('category_edit', {'id': category.id}) }}"> Modifier la catégorie </a> 
+{# passer les paramètres en temps qu'objet #}
+<div>
+<form action="{{ path('category_delete', {'id': category.id}) }}" method="post">
+<button type="submit">Supprimer</button>
+</form>
+</div>
+
 {% endblock %}

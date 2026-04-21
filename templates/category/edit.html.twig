@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Éditer Catégorie{% endblock %}
+
+{% block body %}
+<h1>Édition d'une nouvelle catégorie</h1>
+
+{{form_start(form)}}
+{{form_row(form.name)}}
+<button>Modifier</button>
+ {# pour tester {attr:{'novalidate': 'novalidate'}} #}
+
+{% endblock %}

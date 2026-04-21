@@ -50,12 +50,29 @@ final class CategoryController extends AbstractController
 
     return $this->render('category/show.html.twig', [
             'category' => $repoCategory->find($id),
-            
+            // 'category' => $cat;    Category $cat en param de show() = raccourci pour id
         ]);
 
     }
+    
+     #[Route('/categories/{id}/edit', name: 'category_edit')]
+    public function edit(Category $cat, Request $request, EntityManagerInterface $em): Response{
+        $form = $this->createForm(CategoryType::class, $cat);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            return $this->redirectToRoute('category_show', ['id'=> $cat->getId()]);
+        }
 
+        return $this->render('category/edit.html.twig', ['form' => $form]);
+    }
 
+    #[Route('/categories/{id}/delete', name: 'category_delete')]
+    public function delete(Category $cat, EntityManagerInterface $em): Response{
+        $em->remove($cat);
+        $em->flush();
 
-}
+        return $this->redirectToRoute('category_index');
+    
+    }}
