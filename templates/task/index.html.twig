@@ -15,9 +15,11 @@
 
     {% for task in tasks %}
 
-    <div>
-    <h2>{{task.title}}</h2>
-    <p> Fait {{task.isDone ? 'Oui' : 'Non'}}</p>
+    <div class= "container">
+    <h2> Tâche : {{task.title}}</h2>
+    
+    <p> Fait : {{task.isDone ? '<input type ="checkbox" checked >': '<input type ="checkbox" value = "">'}}</p>
+   
     <span>Crée le : {{task.createdAt | date('d/m/Y H:i:s')}}</span>
     <hr>
     </div>

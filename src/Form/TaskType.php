@@ -13,12 +13,12 @@ class TaskType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder //champs du formulaire
-            ->add('title')
+            ->add('title' )
             // ->add('isDone')
             // ->add('createdAt', null, [
             //     'widget' => 'single_text',
             // ])
-            ->add('save', SubmitType::class, ['label' => 'ajouter une tâche'])
+            ->add('save', SubmitType::class, ['label' => 'Ajouter une tâche'])
         ;
     }
 
