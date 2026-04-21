@@ -98,6 +98,7 @@ input{
     margin:10px;
     width:300px;
 }
+
 button{
     display:flex;
     align-items:center;
@@ -113,6 +114,7 @@ button{
     margin:10px;
     background-image: linear-gradient(to right, #34e4aaff, #68caffff);
 }
+
 
 a {
     color: black;

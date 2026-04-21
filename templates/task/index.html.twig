@@ -17,10 +17,17 @@
 
     <div class= "container">
     <h2> Tâche : {{task.title}}</h2>
+
+    <form action="">
+    <label for=""> Fait
+    <input type="checkbox" name = "isDone" onChange = "submit()">
+    </label>
     
-    <p> Fait : {{task.isDone ? '<input type ="checkbox" checked >': '<input type ="checkbox" value = "">'}}</p>
+    </form>
+    
+    {# <p> Fait : {{task.isDone ? 'Tâche faite : <input type ="checkbox" checked >': 'Tâche à faire :<input type ="checkbox" value = "!isDone">'}}</p> #}
    
-    <span>Crée le : {{task.createdAt | date('d/m/Y H:i:s')}}</span>
+    <small>Crée le : {{task.createdAt | date('d/m/Y H:i:s')}}</small>
     <hr>
     </div>
     {% endfor %}
