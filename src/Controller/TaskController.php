@@ -47,7 +47,7 @@ final class TaskController extends AbstractController
     }
     #[Route('/tasks/complete', name: 'task_complete')]
     public function complete(Request $request, TaskRepository $repo, EntityManagerInterface $em) : Response{
-        
+
         $id = $request->getPayload()->get('id');
         $task = $repo->find($id);
 
@@ -60,5 +60,21 @@ final class TaskController extends AbstractController
 
         return $this->redirectToRoute('task_index');
 
+    }
+
+    #[Route('/tasks/delete', name: 'task_delete')]
+    public function delete(EntityManagerInterface $em, Request $request, TaskRepository $repoTask): Response{
+        
+        $id = $request->getPayload()->get('id');  // parce que on récup "name = "id"" du form
+        $task = $repoTask->find($id); 
+
+        if( $task == null){
+            throw $this->createNotFoundException(); //si pas trouvé de catégorie
+        }
+        $em->remove($task);
+        $em->flush(); //va persister dans la bdd, donc faire la modif
+
+        return $this->redirectToRoute('task_index');
+    
     }
 }

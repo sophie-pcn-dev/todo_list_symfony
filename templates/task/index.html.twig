@@ -1,33 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste de tâches !{% endblock %}
+{% block title %}Liste de tâches !
+{% endblock %}
 
 {% block body %}
 
 
-    <h1>Toutes les tâches</h1>          
-    {{form(form)}}
-    
+	<h1>Toutes les tâches</h1>
 
-    {% for task in tasks %}
+	{{form(form)}}
 
-    <div class= "container">
-    <h2> Tâche : {{task.title}}</h2>
+		{% for task in tasks %}
 
-    <form action="{{ path('task_complete') }}" method="POST">
-    <label for=""> Fait
-    <input type="hidden" name = "id" value = "{{task.id}}"> 
-    <input {{task.isDone ? 'checked':''}} type="checkbox" onChange = "submit()">
-    </label>
-    
-    </form>
-    
-    {# <p> Fait : {{task.isDone ? 'Tâche faite : <input type ="checkbox" checked >': 'Tâche à faire :<input type ="checkbox" value = "!isDone">'}}</p> #}
-   
-    <small>Crée le : {{task.createdAt | date('d/m/Y H:i:s')}}</small>
-    <hr>
-    </div>
-    {% endfor %}
-    
+			<div class="container">
 
-{% endblock %}
+            <div>
+				<h2>
+					Tâche :
+					{{task.title}}</h2>
+
+				<form action="{{ path('task_delete') }}" method="post" onsubmit="return confirm('Supprimer cette tâche ?')">
+					<input
+					type="hidden" name="id" value="{{task.id}}">
+					{# on masque l'id pour pas passer par l'url #}
+
+					<button type="submit"> Supprimer ❌</button>
+				</form>
+            </div>
+                
+				<form action="{{ path('task_complete') }}" method="POST">
+					<label for="">
+						Fait
+						<input type="hidden" name="id" value="{{task.id}}">
+						<input {{task.isDone ? 'checked':''}} type="checkbox" onchange="submit()">
+					</label>
+				</form>
+
+				{# <p> Fait : {{task.isDone ? 'Tâche faite : <input type ="checkbox" checked >': 'Tâche à faire :<input type ="checkbox" value = "!isDone">'}}</p> #}
+
+				<small>Crée le :
+					{{task.createdAt | date('d/m/Y H:i:s')}}</small>
+
+
+				<hr>
+			</div>
+		{% endfor %}
+
+
+	{% endblock %}
