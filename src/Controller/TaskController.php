@@ -45,4 +45,20 @@ final class TaskController extends AbstractController
            
         ]);
     }
+    #[Route('/tasks/complete', name: 'task_complete')]
+    public function complete(Request $request, TaskRepository $repo, EntityManagerInterface $em) : Response{
+        
+        $id = $request->getPayload()->get('id');
+        $task = $repo->find($id);
+
+        if($task === null){
+            throw $this->createNotFoundException();
+        }
+
+        $task->setIsDone(!$task->isDone());
+        $em->flush();
+
+        return $this->redirectToRoute('task_index');
+
+    }
 }
