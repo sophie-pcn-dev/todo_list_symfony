@@ -15,11 +15,15 @@
 			<div class="container">
 
             <div>
+
 				<h2>
 					Tâche :
 					{{task.title}}</h2>
 				
-				<span>Catégorie de la tâche : {{task.category.name}}</span>
+				<br>
+				
+				<span style = "width: 100px; height:30px; background-color:black; border-radius:10px; color:white; padding:15px; margin:10px ">Catégorie : {{task.category.name}}</span>
+				<br><br>
 				{# task contient un objet category donc on va chercher la priorité #}
 
 				<form action="{{ path('task_delete') }}" method="post" onsubmit="return confirm('Supprimer cette tâche ?')">
@@ -31,11 +35,11 @@
 				</form>
             </div>
                 
-				<form action="{{ path('task_complete') }}" method="POST">
-					<label for="">
-						Fait
+				<form action="{{ path('task_complete') }}" method="POST" style ="display:flex; justify-content :center; height:50px; " >
+					<label for="" style ="display:flex; flex-direction:row;">
+						Fait ? :
 						<input type="hidden" name="id" value="{{task.id}}">
-						<input {{task.isDone ? 'checked':''}} type="checkbox" onchange="submit()">
+						<input {{task.isDone ? 'checked':''}} type="checkbox" onchange="submit()" style ="width:20px; height:20px;">
 					</label>
 				</form>
 
