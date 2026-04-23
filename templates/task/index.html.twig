@@ -18,6 +18,9 @@
 				<h2>
 					Tâche :
 					{{task.title}}</h2>
+				
+				<span>Catégorie de la tâche : {{task.category.name}}</span>
+				{# task contient un objet category donc on va chercher la priorité #}
 
 				<form action="{{ path('task_delete') }}" method="post" onsubmit="return confirm('Supprimer cette tâche ?')">
 					<input

@@ -2,7 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
+
 use App\Entity\Task;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType as TypeEntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,7 +16,16 @@ class TaskType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder //champs du formulaire
-            ->add('title' )
+            ->add('title')
+            ->add(
+                'category',
+                TypeEntityType::class,
+                [
+                    'class' => Category::class,
+                    'choice_label' => 'name',
+
+                ],
+            )
             // ->add('isDone')
             // ->add('createdAt', null, [
             //     'widget' => 'single_text',
