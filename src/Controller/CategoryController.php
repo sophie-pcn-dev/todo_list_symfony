@@ -35,9 +35,11 @@ final class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) { //contrainte de validation
             $em->persist($category);
-             $em->flush();
+            $em->flush();
+
+            $this->addFlash('success', 'La catégorie a été ajouté avec succès.');
             
-              return $this->redirectToRoute('category_index');
+            return $this->redirectToRoute('category_index');
             
             }
 
@@ -55,6 +57,8 @@ final class CategoryController extends AbstractController
         }
         $em->remove($cat);
         $em->flush(); //va persister dans la bdd, donc faire la modif
+
+        $this->addFlash('success', 'La catégorie a été supprimé avec succès.');
 
         return $this->redirectToRoute('category_index');
     

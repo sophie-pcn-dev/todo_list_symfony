@@ -20,7 +20,6 @@ final class TaskController extends AbstractController
         EntityManagerInterface $em): Response //em envoie vers bdd, request car on récupère
     {
 
-
         $task = new Task;
         $form = $this->createForm(TaskType::class, $task);
         $form-> handleRequest($request);
@@ -57,6 +56,7 @@ final class TaskController extends AbstractController
 
         $task->setIsDone(!$task->isDone());
         $em->flush();
+        $this->addFlash('success', 'La tâche a été modifié avec succès.');
 
         return $this->redirectToRoute('task_index');
 
@@ -69,10 +69,12 @@ final class TaskController extends AbstractController
         $task = $repoTask->find($id); 
 
         if( $task == null){
-            throw $this->createNotFoundException(); //si pas trouvé de catégorie
+            throw $this->createNotFoundException(); //si pas trouvé de tâche
         }
         $em->remove($task);
         $em->flush(); //va persister dans la bdd, donc faire la modif
+
+        $this->addFlash('success', 'La tâche a été supprimé avec succès.');
 
         return $this->redirectToRoute('task_index');
     

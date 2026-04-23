@@ -33,6 +33,13 @@
             </nav>
 
         </header>
+        
+        {% for message in app.flashes('success') %}
+                <div style = "color:red; margin:40px;">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
         <main>
         {% block body %}{% endblock %}
          </main>
