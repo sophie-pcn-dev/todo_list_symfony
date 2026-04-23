@@ -23,13 +23,28 @@
 
         <header >
         
-            <nav>
+            <nav style = "display:flex; justify-content: space-between; width:100%; padding:15px;">
             
             <ul >
             <li><a href="{{path('task_index')}}">Accueil</a></li>
             <li><a href="{{path('category_index')}}">Catégories</a></li>
             </ul>
             
+            <ul>
+
+            {% if app.user %}
+            <span>Bonjour {{app.user.email}}</span>
+            <li><a href="{{path('app_logout')}}">Se déconnecter</a></li>
+            {% else %}
+
+            <li><a href="{{path('app_login')}}">Se connecter</a></li>
+            <li><a href="{{path('app_register')}}">S'inscrire</a></li>
+
+             {% endif %}
+
+            </ul>
+            
+
             </nav>
 
         </header>
