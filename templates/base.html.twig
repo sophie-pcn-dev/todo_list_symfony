@@ -27,7 +27,10 @@
             
             <ul >
             <li><a href="{{path('task_index')}}">Accueil</a></li>
+
+            {% if app.user %}
             <li><a href="{{path('category_index')}}">Catégories</a></li>
+             {% endif %}
             </ul>
             
             <ul>

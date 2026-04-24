@@ -10,7 +10,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+
 //  #[Route('/categories')].  prefix pour le controller entier, on enlèverai donc /categories
+#[IsGranted('ROLE_USER')]
 final class CategoryController extends AbstractController
 {
     #[Route('/categories', name: 'category_index')]
